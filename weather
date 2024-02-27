@@ -1,0 +1,21 @@
+import requests
+
+def get_weather(city):
+    api_key = "your_api_key"  # Please input your OpenWeatherMap API key here
+    base_url = "http://api.openweathermap.org/data/2.5/weather"
+    complete_url = f"{base_url}q={city}&appid={api_key}&units=metric"
+    response = requests.get(complete_url)
+    data = response.json()
+    if data["cod"] != "404":
+        main_info = data["main"]
+        weather_info = data["weather"][0]
+        temperature = main_info["temp"]
+        description = weather_info["description"]
+        print(f"The current weather in {city}: {description}, Temperature: {temperature}°C")
+    else:
+        print("City not found.")
+
+city_name = input("Enter the city name to get the weather information: ")
+get_weather(city_name)
+
+@secondNFT에 메시지 보내기
